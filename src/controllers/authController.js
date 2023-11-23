@@ -24,8 +24,8 @@ const authController = {
         try {
             const {email, password} = req.body;
 
-            const userCredential = await usersModel.signInWithEmailAndPassword(email, password);
-            const user = userCredential.user;
+            // const userCredential = await usersModel.signInWithEmailAndPassword(email, password);
+            // const user = userCredential.user;
 
             res.status(200).json({
                 status: "success",

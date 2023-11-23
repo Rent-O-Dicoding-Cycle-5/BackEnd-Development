@@ -2,6 +2,16 @@ const {auth, realtimeDB} = require("../config");
 
 
 const usersModel = {
+    // async signInWithEmailAndPassword(email, password) {
+    //     try {
+    //         const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    //         const user = userCredential.user;
+    //         return user;
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // },
+
     async create(user) {
         const {name, email, password} = user;
         const usersSnapshot = await realtimeDB.ref("users").orderByChild("email").equalTo(email).once("value");
