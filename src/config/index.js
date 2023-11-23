@@ -22,8 +22,9 @@ admin.initializeApp({
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
 });
 
+const auth = admin.auth();
 const realtimeDB = admin.database();
 const storage = admin.storage();
 
 
-module.exports = {realtimeDB, storage};
+module.exports = {auth, realtimeDB, storage};
