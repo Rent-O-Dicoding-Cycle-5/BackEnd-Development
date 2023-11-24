@@ -1,22 +1,21 @@
 const {auth, realtimeDB} = require("../config");
+const rolesModel = require("./rolesModel");
 
 
 const usersModel = {
-    // async signInWithEmailAndPassword(email, password) {
-    //     try {
-    //         const userCredential = await auth.signInWithEmailAndPassword(email, password);
-    //         const user = userCredential.user;
-    //         return user;
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // },
-
     async create(user) {
-        const {name, email, password} = user;
-        const usersSnapshot = await realtimeDB.ref("users").orderByChild("email").equalTo(email).once("value");
-        const users = usersSnapshot.val();
-        if (users) {
+        const {username, email, password} = user;
+        const formattedUsername = username.toLowerCase().replace(/\s/g, "");
+
+        const usernameSnapshot = await realtimeDB.ref("accounts").
+            orderByChild("username").equalTo(formattedUsername).once("value");
+        if (usernameSnapshot.val()) {
+            throw new Error("Username already exists");
+        }
+
+        const emailSnapshot = await realtimeDB.ref("accounts").
+            orderByChild("email").equalTo(email).once("value");
+        if (emailSnapshot.val()) {
             throw new Error("Email already exists");
         }
 
@@ -25,12 +24,20 @@ const usersModel = {
             password,
         });
 
+        await realtimeDB.ref(`accounts/${createdUser.uid}`).set({
+            uid: createdUser.uid,
+            displayName: formattedUsername,
+            email,
+            emailVerified: createdUser.emailVerified,
+            createdAt: new Date().toISOString(),
+        });
+
+        const rolesSnapshot = await rolesModel.read(1);
         await realtimeDB.ref(`users/${createdUser.uid}`).set({
             uid: createdUser.uid,
-            fullName: name,
+            username: formattedUsername,
             email,
-            role: "Penyewa",
-            emailVerified: createdUser.emailVerified,
+            roles: rolesSnapshot,
         });
 
         return createdUser;
@@ -41,52 +48,41 @@ const usersModel = {
             const userSnapshot = await realtimeDB.ref(`users/${uid}`).once("value");
             const user = userSnapshot.val();
             if (!user) {
-                throw new Error(`User with id ${uid} not found`);
+                throw new Error("User not found");
             }
+            user.roles = user.roles.filter((role) => role !== null);
             return user;
         } else {
             const usersSnapshot = await realtimeDB.ref("users").once("value");
             const users = usersSnapshot.val();
+            Object.values(users).forEach((user) => {
+                user.roles = user.roles.filter((role) => role !== null);
+            });
             return users;
         }
     },
 
-    async update(id, user) {
-        const {email, name, role} = user;
-        await realtimeDB.ref(`users/${id}`).update({
-            name,
-            email,
-            role,
-        });
-        return {
-            message: `User with id ${id} updated successfully`,
-        };
-    },
+    async update(uid, user) {
+        const {fullName, address, dateBirth, role} = user;
 
-    async delete(id) {
-        await realtimeDB.ref(`users/${id}`).remove();
-        return {
-            message: `User with id ${id} deleted successfully`,
-        };
-    },
-
-    async deleteUserByEmail(email) {
-        try {
-            const usersSnapshot = await realtimeDB.ref("users").orderByChild("email").equalTo(email).once("value");
-            const users = usersSnapshot.val();
-
-            if (!users) {
-                throw new Error("User not found");
-            }
-
-            const userId = Object.keys(users)[0];
-            await realtimeDB.ref(`users/${userId}`).remove();
-            return {
-                message: `User with email ${email} deleted successfully`,
-            };
-        } catch (error) {
-            throw error;
+        const roleSnapshot = await rolesModel.read(role.id);
+        if (!roleSnapshot) {
+            throw new Error("Role not found");
         }
+
+        const userSnapshot = await realtimeDB.ref(`users/${uid}`).once("value");
+        const userToUpdate = userSnapshot.val();
+        if (!userToUpdate) {
+            throw new Error("User not found");
+        }
+
+        await realtimeDB.ref(`users/${uid}`).update({
+            fullName,
+            address,
+            dateBirth,
+            roles: roleSnapshot,
+            updatedAt: new Date().toISOString(),
+        });
     },
 };
 

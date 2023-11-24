@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const authRoute = require("./routes/authRoute");
+const userRoute = require("./routes/userRoute");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRoute);
+app.use("/user", userRoute);
 
 
 module.exports = app;

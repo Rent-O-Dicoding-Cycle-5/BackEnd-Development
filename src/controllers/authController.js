@@ -5,7 +5,6 @@ const authController = {
     async register(req, res) {
         try {
             const newUser = await usersModel.create(req.body);
-            // const users = await usersModel.read(newUser.uid);
             res.status(201).json({
                 status: "success",
                 message: "Register user success!",
@@ -22,20 +21,16 @@ const authController = {
 
     async login(req, res) {
         try {
-            const {email, password} = req.body;
-
-            // const userCredential = await usersModel.signInWithEmailAndPassword(email, password);
-            // const user = userCredential.user;
-
+            const user = await usersModel.read(req.body);
             res.status(200).json({
                 status: "success",
                 message: "Login success!",
                 data: {
                     uid: user.uid,
-                    name: user.fullName,
+                    username: user.username,
                     email: user.email,
                     emailVerified: user.emailVerified,
-                    role: user.role,
+                    roles: user.roles,
                 },
             });
         } catch (error) {
