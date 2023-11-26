@@ -99,12 +99,7 @@ const usersModel = {
     },
 
     async update(uid, user) {
-        const {fullName, address, dateBirth, role} = user;
-
-        const roleSnapshot = await rolesModel.read(role.id);
-        if (!roleSnapshot) {
-            throw new Error("Role not found");
-        }
+        const {fullName, address, dateBirth} = user;
 
         const userSnapshot = await realtimeDB.ref(`users/${uid}`).once("value");
         const userToUpdate = userSnapshot.val();
@@ -116,7 +111,6 @@ const usersModel = {
             fullName,
             address,
             dateBirth,
-            roles: roleSnapshot,
             updatedAt: new Date().toISOString(),
         });
     },
