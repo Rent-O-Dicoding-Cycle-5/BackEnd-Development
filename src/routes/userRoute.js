@@ -5,7 +5,6 @@ const userController = require("../controllers/userController");
 const checkAuth = require("../middleware/checkAuth");
 
 router.get("/profile", checkAuth, userController.read);
-router.put("/profile", checkAuth, userController.update);
 
 
 module.exports = router;

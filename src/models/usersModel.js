@@ -97,23 +97,6 @@ const usersModel = {
             return users;
         }
     },
-
-    async update(uid, user) {
-        const {fullName, address, dateBirth} = user;
-
-        const userSnapshot = await realtimeDB.ref(`users/${uid}`).once("value");
-        const userToUpdate = userSnapshot.val();
-        if (!userToUpdate) {
-            throw new Error("User not found");
-        }
-
-        await realtimeDB.ref(`users/${uid}`).update({
-            fullName,
-            address,
-            dateBirth,
-            updatedAt: new Date().toISOString(),
-        });
-    },
 };
 
 
