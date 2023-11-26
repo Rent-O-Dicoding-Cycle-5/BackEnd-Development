@@ -6,6 +6,7 @@ const app = express();
 
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
+const vehicleRoute = require("./routes/vehicleRoute");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
+app.use("/vehicle", vehicleRoute);
 
 
 module.exports = app;
