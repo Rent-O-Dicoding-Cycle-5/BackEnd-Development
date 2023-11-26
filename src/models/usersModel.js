@@ -42,7 +42,7 @@ const usersModel = {
             uid: createdUser.uid,
             username: formattedUsername,
             email,
-            roles: rolesSnapshot,
+            roles: [rolesSnapshot],
         });
 
         return createdUser;
