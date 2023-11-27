@@ -6,6 +6,7 @@ const app = express();
 
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
+const partnerRoute = require("./routes/partnerRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
 
 app.use(cors());
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
+app.use("/partner", partnerRoute);
 app.use("/vehicle", vehicleRoute);
 
 
