@@ -298,7 +298,7 @@ Content-Type: application/json
   "status": "success",
   "message": "Update vehicle success!",
   "data": {
-    "vehicles": {...}
+    "vehicle": {...}
   }
 }
 ```
@@ -321,7 +321,7 @@ Content-Type: application/json
   "status": "success",
   "message": "Delete vehicle success!",
   "data": {
-    "vehicles": {...}
+    "vehicle": {...}
   }
 }
 ```
