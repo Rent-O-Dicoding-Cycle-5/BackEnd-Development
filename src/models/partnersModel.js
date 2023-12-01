@@ -32,8 +32,8 @@ const partnersModel = {
 
         const createdPartner = await realtimeDB.ref(`partners/${uid}`).set({
             uid,
-            ktp: ktpData,
-            sim: simData,
+            ktpInformation: ktpData,
+            simInformation: simData,
             createdAt: new Date().toISOString(),
         });
 
