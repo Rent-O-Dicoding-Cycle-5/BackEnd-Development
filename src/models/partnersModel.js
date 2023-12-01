@@ -91,7 +91,7 @@ const partnersModel = {
         await storage.bucket().file(simPath).save(simImage.buffer);
 
         const url_SIM = `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${simPath}`;
-        await realtimeDB.ref(`partners/${uid}/sim`).update({url_SIM});
+        await realtimeDB.ref(`partners/${uid}/simInformation`).update({url_SIM});
 
         return url_SIM;
     },
