@@ -6,7 +6,7 @@ const rolesModel = require("./rolesModel");
 const partnersModel = {
     async create(uid, partner) {
         const {
-            fullName_KTP, nik_KTP, address_KTP, city_KTP, province_KTP, postalCode_KTP, dateBirth_KTP,
+            fullName_KTP, nik_KTP, address_KTP, city_KTP, province_KTP, postalCode_KTP, placeBirth_KTP, dateBirth_KTP,
             type_SIM, number_SIM, expired_SIM,
         } = partner;
 
@@ -22,10 +22,18 @@ const partnersModel = {
             throw new Error("Partner already exists");
         }
 
+        const ktpData = {
+            fullName_KTP, nik_KTP, address_KTP, city_KTP, province_KTP, postalCode_KTP, placeBirth_KTP, dateBirth_KTP
+        };
+
+        const simData = {
+            type_SIM, number_SIM, expired_SIM
+        };
+
         const createdPartner = await realtimeDB.ref(`partners/${uid}`).set({
             uid,
-            fullName_KTP, nik_KTP, address_KTP, city_KTP, province_KTP, postalCode_KTP, dateBirth_KTP,
-            type_SIM, number_SIM, expired_SIM,
+            ktp: ktpData,
+            sim: simData,
             createdAt: new Date().toISOString(),
         });
 
