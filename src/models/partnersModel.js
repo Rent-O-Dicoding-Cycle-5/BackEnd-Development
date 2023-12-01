@@ -1,4 +1,5 @@
-const {realtimeDB} = require("../config");
+require("dotenv").config();
+const {realtimeDB, storage} = require("../config");
 const rolesModel = require("./rolesModel");
 
 
@@ -60,7 +61,7 @@ const partnersModel = {
             throw new Error("Partner not found");
         }
 
-        const updatedPartner = await realtimeDB.ref(`partners/${uid}`).update({
+        const updatedPartner = await realtimeDB.ref(`partners/${uid}/sim`).update({
             type_SIM,
             number_SIM,
             expired_SIM,
@@ -68,6 +69,23 @@ const partnersModel = {
         });
 
         return updatedPartner;
+    },
+
+    async uploadImgSim(uid, simImage) {
+        if (!simImage) {
+            throw new Error("Please upload an image");
+        }
+
+        const formattedDate = new Date().toISOString().replace(/-|:|T|Z|\./g, "");
+        const extension = simImage.originalname.split(".").pop();
+        const simPath = `partners/${uid}/sim/${formattedDate}${Date.now()}.${extension}`;
+
+        await storage.bucket().file(simPath).save(simImage.buffer);
+
+        const url_SIM = `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${simPath}`;
+        await realtimeDB.ref(`partners/${uid}/sim`).update({url_SIM});
+
+        return url_SIM;
     },
 };
 

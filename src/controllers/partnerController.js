@@ -58,6 +58,25 @@ const partnersController = {
             });
         }
     },
+
+    async uploadSim(req, res) {
+        try {
+            const {uid} = req.user;
+            const partner = await partnersModel.uploadImgSim(uid, req.file);
+            res.status(200).json({
+                status: "success",
+                message: "Upload SIM success!",
+                data: {
+                    url: partner,
+                },
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "failed",
+                message: error.message,
+            });
+        }
+    },
 };
 
 
