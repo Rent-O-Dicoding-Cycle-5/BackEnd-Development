@@ -43,6 +43,9 @@ const usersModel = {
             uid: createdUser.uid,
             username: formattedUsername,
             email,
+            urlImage: `
+                https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/users/profiles/default.png
+            `,
             roles: [rolesSnapshot],
         });
 
@@ -124,7 +127,7 @@ const usersModel = {
 
         const formattedDate = new Date().toISOString().replace(/-|:|T|Z|\./g, "");
         const extension = imgProfile.originalname.split(".").pop();
-        const profilePath = `profiles/${uid}/${formattedDate}${Date.now()}.${extension}`;
+        const profilePath = `users/profiles/${uid}/${formattedDate}${Date.now()}.${extension}`;
 
         await storage.bucket().file(profilePath).save(imgProfile.buffer);
 
