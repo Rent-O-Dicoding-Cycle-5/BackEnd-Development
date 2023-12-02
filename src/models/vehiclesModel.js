@@ -9,11 +9,19 @@ const vehiclesModel = {
             if (!vehicle) {
                 throw new Error("Vehicle not found");
             }
-            return vehicle;
+            return {vehicleId: id, ...vehicle};
         } else {
             const vehiclesSnapshot = await realtimeDB.ref("vehicles").once("value");
             const vehicles = vehiclesSnapshot.val();
-            return vehicles;
+            if (!vehicles) {
+                throw new Error("Vehicles not found");
+            }
+
+            const vehiclesArray = Object.entries(vehicles).map(([vehicleId, vehicle]) => ({
+                vehicleId,
+                ...vehicle,
+            }));
+            return vehiclesArray;
         }
     },
 };
