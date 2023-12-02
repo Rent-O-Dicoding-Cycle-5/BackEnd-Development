@@ -8,6 +8,7 @@ const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const partnerRoute = require("./routes/partnerRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
+const vehicleFilterRoute = require("./routes/vehicleFilterRoute");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -22,6 +23,7 @@ app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/partner", partnerRoute);
 app.use("/vehicle", vehicleRoute);
+app.use("/vehicle", vehicleFilterRoute);
 
 
 module.exports = app;
