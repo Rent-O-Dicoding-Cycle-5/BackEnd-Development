@@ -43,9 +43,7 @@ const usersModel = {
             uid: createdUser.uid,
             username: formattedUsername,
             email,
-            urlImage: `
-                https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/users/profiles/default.png
-            `,
+            urlImage: `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/users/profiles/default.png`,
             roles: [rolesSnapshot],
         });
 
