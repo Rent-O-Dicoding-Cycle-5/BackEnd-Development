@@ -48,7 +48,7 @@ const userController = {
                 status: "success",
                 message: "Upload image profile success!",
                 data: {
-                    user,
+                    imageUrl: user,
                 },
             });
         } catch (error) {
