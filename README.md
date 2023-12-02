@@ -12,6 +12,8 @@ Endpoint to check if the server is running properly.
   - Status Code: `200 OK`
   - Body: `"Server is running!"`
 
+## Authentication Endpoint
+
 ### POST /auth/register
 
 Endpoint for register.
@@ -62,6 +64,7 @@ Content-Type: application/json
 }
 ```
 
+## User Endpoint
 
 ### GET /user/profile
 
@@ -90,14 +93,19 @@ Content-Type: application/json
 }
 ```    
 
-### PUT /user/profile
+### PUT /user/profile/data
 
 Endpoint for update user profil.
 
-- URL: `/user/profile`
+- URL: `/user/profile/data`
 - Method: `PUT`
 - Request
-    - Headers: Include the `Authorization` header for user identification.
+    - Headers: 
+      - `Authorization` Bearer token for authentication.
+      - `Content-Type` Application/JSON.
+    - Body :
+      - `fullName` (string, optional) - New full name.
+      - `phoneNumber` (string, optional) - New phone number.
 - Success Response (200) OK
 ```json
 HTTP/1.1 200 OK
@@ -108,15 +116,38 @@ Content-Type: application/json
   "data": {
     "user": {
       "uid": "user123",
-      "username": "new_username",
-      "email": "new_email@example.com",
-      "emailVerified": true,
-      "roles": ["user"]
+      "fullName": "John New Doe",
+      "phoneNumber": "+9876543210",
     }
+  }
+}
+```
+
+### POST /user/profile/img
+
+Endpoint for update user profil.
+
+- URL: `/user/profile/img`
+- Method: `POST`
+- Request
+    - Headers: 
+      - `Authorization` Bearer token for authentication.
+    - Body : Form data with a single file field named `image`.
+- Success Response (200) OK
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "status": "success",
+  "message": "Upload image profile success!",
+  "data": {
+    "imageUrl": "https://storage.googleapis.com/storage-bucket/users/profiles/john_doe/20230101235900123.png"
   }
 }
 
 ```
+
+## Partner Endpoints
 
 ### GET /partner
 
@@ -239,6 +270,8 @@ Content-Type: application/json
 }
 ```
 
+## Vehicle Endpoints
+
 ### GET /vehicle
 
 Endpoint for retrieve information about all vehicles.
@@ -277,6 +310,8 @@ Content-Type: application/json
   }
 }
 ```
+
+## Vehicle Filter Endpoints
 
 ### GET /vehicle/list/type/:type
 
