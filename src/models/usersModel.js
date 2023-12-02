@@ -1,4 +1,5 @@
-const {auth, realtimeDB} = require("../config");
+require("dotenv").config();
+const {auth, realtimeDB, storage} = require("../config");
 const rolesModel = require("./rolesModel");
 const bcryptPassword = require("../middleware/bcryptPassword");
 
@@ -114,6 +115,23 @@ const usersModel = {
         });
 
         return user;
+    },
+
+    async uploadImgProfile(uid, imgProfile) {
+        if (!imgProfile) {
+            throw new Error("Please upload an image");
+        }
+
+        const formattedDate = new Date().toISOString().replace(/-|:|T|Z|\./g, "");
+        const extension = imgProfile.originalname.split(".").pop();
+        const profilePath = `profiles/${uid}/${formattedDate}${Date.now()}.${extension}`;
+
+        await storage.bucket().file(profilePath).save(imgProfile.buffer);
+
+        const urlImage = `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${profilePath}`;
+        await realtimeDB.ref(`users/${uid}`).update({urlImage});
+
+        return urlImage;
     },
 };
 

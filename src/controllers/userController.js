@@ -39,6 +39,25 @@ const userController = {
             });
         }
     },
+
+    async uploadImgProfile(req, res) {
+        try {
+            const {uid} = req.user;
+            const user = await usersModel.uploadImgProfile(uid, req.file);
+            res.status(200).json({
+                status: "success",
+                message: "Upload image profile success!",
+                data: {
+                    user,
+                },
+            });
+        } catch (error) {
+            res.status(400).json({
+                status: "failed",
+                message: error.message,
+            });
+        }
+    },
 };
 
 
