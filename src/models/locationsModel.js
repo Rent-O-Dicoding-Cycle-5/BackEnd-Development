@@ -12,7 +12,8 @@ const locationsModel = {
             return location;
         } else {
             const locationsSnapshot = await realtimeDB.ref("locations").once("value");
-            const locations = locationsSnapshot.val();
+            let locations = locationsSnapshot.val();
+            locations = locations.filter((location) => location !== null);
             return locations;
         }
     },

@@ -7,6 +7,7 @@ const app = express();
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
 const partnerRoute = require("./routes/partnerRoute");
+const locationRoute = require("./routes/locationRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
 const vehicleFilterRoute = require("./routes/vehicleFilterRoute");
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/partner", partnerRoute);
+app.use("/location", locationRoute);
 app.use("/vehicle", vehicleRoute);
 app.use("/vehicle", vehicleFilterRoute);
 
