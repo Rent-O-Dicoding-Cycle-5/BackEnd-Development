@@ -12,7 +12,8 @@ const vehicleTypesModel = {
             return vehicleType;
         } else {
             const vehicleTypesSnapshot = await realtimeDB.ref("vehicleTypes").once("value");
-            const vehicleTypes = vehicleTypesSnapshot.val();
+            let vehicleTypes = vehicleTypesSnapshot.val();
+            vehicleTypes = vehicleTypes.filter((vehicleType) => vehicleType !== null);
             return vehicleTypes;
         }
     },
