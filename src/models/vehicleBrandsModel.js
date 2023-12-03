@@ -12,7 +12,8 @@ const vehicleBrandsModel = {
             return vehicleBrand;
         } else {
             const vehicleBrandsSnapshot = await realtimeDB.ref("vehicleBrands").once("value");
-            const vehicleBrands = vehicleBrandsSnapshot.val();
+            let vehicleBrands = vehicleBrandsSnapshot.val();
+            vehicleBrands = vehicleBrands.filter((vehicleBrand) => vehicleBrand !== null);
             return vehicleBrands;
         }
     },

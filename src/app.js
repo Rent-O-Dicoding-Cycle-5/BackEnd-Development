@@ -10,6 +10,7 @@ const partnerRoute = require("./routes/partnerRoute");
 const locationRoute = require("./routes/locationRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
 const vehicleTypeRoute = require("./routes/vehicleTypeRoute");
+const vehicleBrandRoute = require("./routes/vehicleBrandRoute");
 const vehicleFilterRoute = require("./routes/vehicleFilterRoute");
 
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/partner", partnerRoute);
 app.use("/location", locationRoute);
 app.use("/vehicle", vehicleRoute);
 app.use("/vehicle-type", vehicleTypeRoute);
+app.use("/vehicle-brand", vehicleBrandRoute);
 app.use("/vehicle", vehicleFilterRoute);
 
 
