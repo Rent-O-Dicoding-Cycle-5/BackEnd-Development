@@ -6,7 +6,7 @@ const rolesModel = require("./rolesModel");
 const partnersModel = {
     async create(uid, partner) {
         const {
-            fullName_KTP, nik_KTP, address_KTP, city_KTP, province_KTP, postalCode_KTP, placeBirth_KTP, dateBirth_KTP,
+            phoneNumber, fullName_KTP, nik_KTP, address_KTP, city_KTP, province_KTP, postalCode_KTP, placeBirth_KTP, dateBirth_KTP,
             type_SIM, number_SIM, expired_SIM,
         } = partner;
 
@@ -32,6 +32,7 @@ const partnersModel = {
 
         const createdPartner = await realtimeDB.ref(`partners/${uid}`).set({
             uid,
+            phoneNumber,
             ktpInformation: ktpData,
             simInformation: simData,
             createdAt: new Date().toISOString(),
@@ -69,7 +70,7 @@ const partnersModel = {
             throw new Error("Partner not found");
         }
 
-        const updatedPartner = await realtimeDB.ref(`partners/${uid}/sim`).update({
+        const updatedPartner = await realtimeDB.ref(`partners/${uid}/simInformation`).update({
             type_SIM,
             number_SIM,
             expired_SIM,
