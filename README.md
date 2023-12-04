@@ -228,6 +228,46 @@ Endpoint for Update an image or PDF file of the partner's SIM (driver's license)
 ```
 
 
+## Location Endpoints
+
+### GET /location
+
+Endpoint for retrieve all location.
+
+- URL: `/location`
+- Method: `GET`
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read all locations success!",
+  "data": {
+    "vehicles": [{...}]
+  }
+}
+```
+
+### GET /location/:id
+
+Endpoint for retrieve specific location.
+
+- URL: `/location/:id`
+- Method: `GET`
+- Request
+    - Params:
+      - `id` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read location success!",
+  "data": {
+    "vehicle": {...}
+  }
+}
+```
+
+
 ## Vehicle Endpoints
 
 ### GET /vehicle/list
@@ -267,6 +307,84 @@ Endpoint for retrieve information about a specific vehicle.
 }
 ```
 
+## Vehicle Type Endpoints
+
+### GET /vehicle-type
+
+Endpoint for retrieve information about all vehicle type.
+
+- URL: `/vehicle-type`
+- Method: `GET`
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read all vehicleTypes success!",
+  "data": {
+    "vehicles": [{...}]
+  }
+}
+```
+
+### GET /vehicle-type/:id
+
+Endpoint for retrieve information about a specific vehicle type.
+
+- URL: `/vehicle-type/:id`
+- Method: `GET`
+- Request
+    - Params:
+      - `id` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read vehicleType success!",
+  "data": {
+    "vehicle": {...}
+  }
+}
+```
+
+
+## Vehicle Brand Endpoints
+
+### GET /vehicle-brand
+
+Endpoint for retrieve information about all vehicle brand.
+
+- URL: `/vehicle-type`
+- Method: `GET`
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read all vehicleBrands success!",
+  "data": {
+    "vehicles": [{...}]
+  }
+}
+```
+
+### GET /vehicle-brand/:id
+
+Endpoint for retrieve information about a specific vehicle brand.
+
+- URL: `/vehicle-brand/:id`
+- Method: `GET`
+- Request
+    - Params:
+      - `id` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read vehicleBrand success!",
+  "data": {
+    "vehicle": {...}
+  }
+}
+```
 
 ## Vehicle Filter Endpoints
 
