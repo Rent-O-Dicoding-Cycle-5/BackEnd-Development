@@ -17,6 +17,15 @@ const vehicleBrandsModel = {
             return vehicleBrands;
         }
     },
+
+    async readByValue(value) {
+        const vehicleBrandsSnapshot = await realtimeDB.ref("vehicleBrands").once("value");
+        const vehicleBrands = vehicleBrandsSnapshot.val();
+        if (!vehicleBrands.includes(value)) {
+            throw new Error("Vehicle brand not found");
+        }
+        return value;
+    },
 };
 
 
