@@ -17,6 +17,15 @@ const locationsModel = {
             return locations;
         }
     },
+
+    async readByValue(value) {
+        const locationsSnapshot = await realtimeDB.ref("locations").once("value");
+        const locations = locationsSnapshot.val();
+        if (!locations.includes(value)) {
+            throw new Error("Location not found");
+        }
+        return value;
+    },
 };
 
 
