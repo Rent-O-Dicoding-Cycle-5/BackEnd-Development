@@ -163,6 +163,7 @@ Endpoint for create partner.
       - `Authorization:` Bearer token for authentication.
       - `Content-Type:` application/json.
     - Body:
+      - `phoneNumber` (string).
       - `fullName_KTP` (string).
       - `nik_KTP` (string).
       - `address_KTP` (string).
