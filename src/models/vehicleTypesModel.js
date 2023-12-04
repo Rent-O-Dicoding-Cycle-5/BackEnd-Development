@@ -17,6 +17,15 @@ const vehicleTypesModel = {
             return vehicleTypes;
         }
     },
+
+    async readByValue(value) {
+        const vehicleTypesSnapshot = await realtimeDB.ref("vehicleTypes").once("value");
+        const vehicleTypes = vehicleTypesSnapshot.val();
+        if (!vehicleTypes.includes(value)) {
+            throw new Error("Vehicle type not found");
+        }
+        return value;
+    },
 };
 
 
