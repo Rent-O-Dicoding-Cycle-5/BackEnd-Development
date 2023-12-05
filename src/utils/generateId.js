@@ -1,5 +1,5 @@
 const generateId = () => {
-    const keys = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const keys = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     let id = "";
     for (let i = 0; i < 32; i++) {
