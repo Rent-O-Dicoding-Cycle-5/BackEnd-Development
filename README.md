@@ -546,7 +546,18 @@ Endpoint for upload an image file of the partner vehicle image.
     - Headers: 
       - `Authorization:` Bearer token for authentication.
       - `Content-Type:` multipart/form-data.
-    - Body: Form data with a single file field named `sim`.
+    - Body:
+      - `name` (string).
+      - `type` (string).
+      - `brand` (string).
+      - `plateNumber` (string).
+      - `bpkb` (string).
+      - `stnk` (string).
+      - `seats` (string).
+      - `description` (string).
+      - `cost` (string).
+      - `location` (string).
+      - `address` (string). 
 - Success Response (200) OK
 ```json
 {
