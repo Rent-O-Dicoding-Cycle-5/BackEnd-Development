@@ -533,3 +533,97 @@ Endpoint to filter vehicles based on vehicle type, brand, and location.
   }
 }
 ```
+
+## Partner Vehicle Endpoints
+
+### POST /partner-vehicle
+
+Endpoint for upload an image file of the partner vehicle image.
+
+- URL: `/partner-vehicle`
+- Method: `POST`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` multipart/form-data.
+    - Body: Form data with a single file field named `sim`.
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Create partner vehicle success!",
+  "data": {...}
+}
+```
+
+### GET /partner-vehicle/list
+
+Endpoint for retrieve list all partner vehicles.
+
+- URL: `/partner-vehicle/list`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read partner vehicles success!",
+  "data": {...}
+}
+```
+
+### PUT /partner-vehicle/update/:id
+
+Endpoint for update partner vehicle.
+
+- URL: `/partner-vehicle/update/:id`
+- Method: `PUT`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` multipart/form-data.
+    - Params:
+      - `id` (string).
+    - Body:
+      - `name` (string).
+      - `type` (string).
+      - `brand` (string).
+      - `plateNumber` (string).
+      - `bpkb` (string).
+      - `stnk` (string).
+      - `seats` (string).
+      - `description` (string).
+      - `cost` (string).
+      - `location` (string).
+      - `address` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Update partner vehicle success!",
+  "data": {...}
+}
+```
+
+
+### DELETE /partner-vehicle/delete/:id
+
+Endpoint for retrieve list all partner vehicles.
+
+- URL: `/partner-vehicle/delete/:id`
+- Method: `DELETE`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `id` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Delete partner vehicle success!",
+  "data": {...}
+}
+```
