@@ -538,7 +538,7 @@ Endpoint to filter vehicles based on vehicle type, brand, and location.
 
 ### POST /partner-vehicle
 
-Endpoint for upload an image file of the partner vehicle image.
+Endpoint for upload an image file of the partner vehicle image and detail vehicle.
 
 - URL: `/partner-vehicle`
 - Method: `POST`
@@ -557,7 +557,8 @@ Endpoint for upload an image file of the partner vehicle image.
       - `description` (string).
       - `cost` (string).
       - `location` (string).
-      - `address` (string). 
+      - `address` (string).
+      - `vehicleImage` (file). 
 - Success Response (200) OK
 ```json
 {
@@ -587,7 +588,7 @@ Endpoint for retrieve list all partner vehicles.
 
 ### PUT /partner-vehicle/update/:id
 
-Endpoint for update partner vehicle.
+Endpoint for update partner vehicle image and detail vehicle.
 
 - URL: `/partner-vehicle/update/:id`
 - Method: `PUT`
@@ -609,6 +610,7 @@ Endpoint for update partner vehicle.
       - `cost` (string).
       - `location` (string).
       - `address` (string).
+      - `vehicleImage` (file).
 - Success Response (200) OK
 ```json
 {
