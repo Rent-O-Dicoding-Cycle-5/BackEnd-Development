@@ -17,7 +17,9 @@ const rentsModel = {
         if (vehicle.partner.partnerId === uid) {
             throw new Error("Vehicle owner is not allowed to rent their own vehicle.");
         }
-
+        if (!vehicle.isAvailable) {
+            throw new Error("Vehicle is not available for rent.");
+        }
         const newRentId = generateId();
 
         await realtimeDB.ref(`rents/${uid}/${newRentId}`).set({
