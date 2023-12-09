@@ -8,18 +8,14 @@ const rentsModel = {
             deliveryLocation, deliveryTime, paymentMethod,
         } = req.body;
 
-        const partnerSnapshot = await realtimeDB.ref(`partners/${uid}`).once("value");
         const vehicleSnapshot = await realtimeDB.ref(`vehicles/${vehicleId}`).once("value");
-
-        const partner = partnerSnapshot.val();
         const vehicle = vehicleSnapshot.val();
-
-        if (!partner) {
-            throw new Error("Partner not found");
-        }
 
         if (!vehicle) {
             throw new Error("Vehicle not found");
+        }
+        if (vehicle.partner.partnerId === uid) {
+            throw new Error("Vehicle owner is not allowed to rent their own vehicle.");
         }
 
         const newRentId = generateId();
@@ -33,7 +29,7 @@ const rentsModel = {
             deliveryLocation,
             deliveryTime,
             paymentMethod,
-            partnerId: uid,
+            userId: uid,
             vehicleId,
             createdAt: new Date().toISOString(),
         });
