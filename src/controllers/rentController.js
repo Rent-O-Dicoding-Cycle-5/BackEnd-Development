@@ -40,7 +40,6 @@ const rentController = {
             });
         }
     },
-
 };
 
 module.exports = rentController;

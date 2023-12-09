@@ -3,7 +3,7 @@ const router = express.Router();
 const rentController = require("../controllers/rentController");
 const checkAuth = require("../middleware/checkAuth");
 
-router.post("/", checkAuth, rentController.create);
-router.get("/:id", checkAuth, rentController.read);
+router.post("/:Id", checkAuth, rentController.create);
+// router.get("/list", checkAuth, rentController.read);
 
 module.exports = router;

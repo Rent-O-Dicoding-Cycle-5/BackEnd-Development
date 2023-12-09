@@ -34,7 +34,7 @@ const rentsModel = {
             deliveryTime,
             paymentMethod,
             partnerId: uid,
-            vehicleId: vehicleId,
+            vehicleId,
             createdAt: new Date().toISOString(),
         });
 
@@ -52,6 +52,7 @@ const rentsModel = {
         if (!rent) {
             throw new Error("Rent not found");
         }
+
         const {partnerId, vehicleId} = rent;
 
         const partnerSnapshot = await realtimeDB.ref(`partners/${partnerId}`).once("value");
@@ -62,8 +63,8 @@ const rentsModel = {
 
         return {
             ...rent,
-            partner: partner,
-            vehicle: vehicle,
+            partner,
+            vehicle,
         };
     },
 };
