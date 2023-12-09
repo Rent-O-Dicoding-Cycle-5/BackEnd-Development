@@ -4,8 +4,8 @@ const rentController = {
     async create(req, res) {
         try {
             const {uid} = req.user;
-            const {vehicleId} = req.params;
-            const rent = await rentsModel.create(uid, vehicleId, req.body);
+            const vehicleId = req.params.id;
+            const rent = await rentsModel.create(uid, vehicleId, req);
             res.status(201).json({
                 status: "success",
                 message: "Rent created successfully",
