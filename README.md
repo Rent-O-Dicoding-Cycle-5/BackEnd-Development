@@ -654,7 +654,7 @@ Endpoint for read rent vehicle.
     - Headers: 
       - `Authorization:` Bearer token for authentication.
     - Params:
-      - `id` (string).
+      - `rentId` (string).
 - Success Response (201) OK
 ```json
 {
@@ -704,7 +704,7 @@ Endpoint for update payment.
       - `Authorization:` Bearer token for authentication.
       - `Content-Type:` application/json.
     - Params:
-      - `id` (string).
+      - `rentId` (string).
     - Body:
       - `totalPayment` (string). 
 - Success Response (200) OK
