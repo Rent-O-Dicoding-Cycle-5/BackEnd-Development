@@ -21,7 +21,10 @@ const vehiclesModel = {
                 vehicleId,
                 ...vehicle,
             }));
-            return vehiclesArray;
+
+            const availableVehicles = vehiclesArray.filter((vehicle) => vehicle.isAvailable === true);
+
+            return availableVehicles;
         }
     },
 };
