@@ -536,6 +536,24 @@ Endpoint to filter vehicles based on vehicle type, brand, and location.
 
 ## Partner Vehicle Endpoints
 
+### GET /partner-vehicle/list
+
+Endpoint for retrieve list all partner vehicles.
+
+- URL: `/partner-vehicle/list`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read partner vehicles success!",
+  "data": {...}
+}
+```
+
 ### POST /partner-vehicle
 
 Endpoint for upload an image file of the partner vehicle image and detail vehicle.
@@ -564,24 +582,6 @@ Endpoint for upload an image file of the partner vehicle image and detail vehicl
 {
   "status": "success",
   "message": "Create partner vehicle success!",
-  "data": {...}
-}
-```
-
-### GET /partner-vehicle/list
-
-Endpoint for retrieve list all partner vehicles.
-
-- URL: `/partner-vehicle/list`
-- Method: `GET`
-- Request
-    - Headers: 
-      - `Authorization:` Bearer token for authentication.
-- Success Response (200) OK
-```json
-{
-  "status": "success",
-  "message": "Read partner vehicles success!",
   "data": {...}
 }
 ```
@@ -643,36 +643,8 @@ Endpoint for retrieve list all partner vehicles.
 
 ## Rent Vehicle Endpoints
 
-### POST /rent-vehicle/:id
 
-Endpoint for post rent vehicle.
-
-- URL: `/rent-vehicle/:id`
-- Method: `POST`
-- Request
-    - Headers: 
-      - `Authorization:` Bearer token for authentication.
-      - `Content-Type:` multipart/form-data.
-    - Params:
-      - `vehicleId` (string).
-    - Body:
-      - `startDate` (string).
-      - `endDate` (string).
-      - `pickupLocation` (string).
-      - `pickupTime` (string).
-      - `deliveryLocation` (string).
-      - `deliveryTime` (string).
-      - `paymentMethod` (string).
-- Success Response (200) OK
-```json
-{
-  "status": "success",
-  "message": "Create rent success",
-  "data": {...}
-}
-```
-
-### POST /rent-vehicle/detail/:id
+### GET /rent-vehicle/detail/:id
 
 Endpoint for read rent vehicle.
 
@@ -692,6 +664,34 @@ Endpoint for read rent vehicle.
 }
 ```
 
+### POST /rent-vehicle/:id
+
+Endpoint for post rent vehicle.
+
+- URL: `/rent-vehicle/:id`
+- Method: `POST`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` application/json.
+    - Params:
+      - `vehicleId` (string).
+    - Body:
+      - `startDate` (string).
+      - `endDate` (string).
+      - `pickupLocation` (string).
+      - `pickupTime` (string).
+      - `deliveryLocation` (string).
+      - `deliveryTime` (string).
+      - `paymentMethod` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Create rent success",
+  "data": {...}
+}
+```
 
 ### PUT /rent-vehicle/payment/:id
 
@@ -702,7 +702,7 @@ Endpoint for update payment.
 - Request
     - Headers: 
       - `Authorization:` Bearer token for authentication.
-      - `Content-Type:` multipart/form-data.
+      - `Content-Type:` application/json.
     - Params:
       - `id` (string).
     - Body:
