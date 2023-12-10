@@ -640,3 +640,78 @@ Endpoint for retrieve list all partner vehicles.
   "data": {...}
 }
 ```
+
+## Rent Vehicle Endpoints
+
+### POST /rent-vehicle/:id
+
+Endpoint for post rent vehicle.
+
+- URL: `/rent-vehicle/:id`
+- Method: `POST`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` multipart/form-data.
+    - Params:
+      - `vehicleId` (string).
+    - Body:
+      - `startDate` (string).
+      - `endDate` (string).
+      - `pickupLocation` (string).
+      - `pickupTime` (string).
+      - `deliveryLocation` (string).
+      - `deliveryTime` (string).
+      - `paymentMethod` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Create rent success",
+  "data": {...}
+}
+```
+
+### POST /rent-vehicle/detail/:id
+
+Endpoint for read rent vehicle.
+
+- URL: `/rent-vehicle/detail/:id`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `id` (string).
+- Success Response (201) OK
+```json
+{
+  "status": "success",
+  "message": "Read rent success",
+  "data": {...}
+}
+```
+
+
+### PUT /rent-vehicle/payment/:id
+
+Endpoint for update payment.
+
+- URL: `/rent-vehicle/payment/:id`
+- Method: `PUT`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` multipart/form-data.
+    - Params:
+      - `id` (string).
+    - Body:
+      - `totalPayment` (string). 
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Update rent success",
+  "data": {...}
+}
+```
