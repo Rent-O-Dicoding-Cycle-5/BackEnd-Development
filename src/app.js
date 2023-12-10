@@ -14,6 +14,7 @@ const vehicleBrandRoute = require("./routes/vehicleBrandRoute");
 const vehicleFilterRoute = require("./routes/vehicleFilterRoute");
 const partnerVehicleRoute = require("./routes/partnerVehicleRoute");
 const rentVehicleRoute = require("./routes/rentVehicleRoute");
+const userRentRoute = require("./routes/userRentRoute");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -34,6 +35,7 @@ app.use("/vehicle-brand", vehicleBrandRoute);
 app.use("/vehicle", vehicleFilterRoute);
 app.use("/partner-vehicle", partnerVehicleRoute);
 app.use("/rent-vehicle", rentVehicleRoute);
+app.use("/user-rent", userRentRoute);
 
 
 module.exports = app;
