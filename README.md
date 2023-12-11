@@ -13,7 +13,7 @@ Endpoint to check if the server is running properly.
   - Body: `"Server is running!"`
 
 
-## Authentication Endpoint
+## Authentication Endpoints
 
 ### POST /auth/register
 
@@ -59,7 +59,7 @@ Endpoint for login.
 ```
 
 
-## User Endpoint
+## User Endpoints
 
 ### GET /user/profile
 
@@ -712,6 +712,49 @@ Endpoint for update payment.
 {
   "status": "success",
   "message": "Update rent success",
+  "data": {...}
+}
+```
+
+## User Rent Endpoints
+
+### GET /user-rent/:uid/:rentId
+
+Endpoint for retrieve specific rent history user.
+
+- URL: `/user-rent/:uid/:rentId`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `uid` (string).
+      - `rentId` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read user rent success!",
+  "data": {...}
+}
+```
+
+### GET /user-rent/:uid
+
+Endpoint for retrieve all rent history user.
+
+- URL: `/user-rent/:uid/:rentId`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `uid` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read all user rents success!",
   "data": {...}
 }
 ```
