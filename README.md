@@ -354,7 +354,7 @@ Endpoint for retrieve information about a specific vehicle type.
 
 Endpoint for retrieve information about all vehicle brand.
 
-- URL: `/vehicle-type`
+- URL: `/vehicle-brand`
 - Method: `GET`
 - Success Response (200) OK
 ```json
