@@ -1,4 +1,5 @@
 const usersModel = require("../models/usersModel");
+const jwt = require("jsonwebtoken");
 
 const checkAuth = async (req, res, next) => {
     try {
@@ -6,8 +7,9 @@ const checkAuth = async (req, res, next) => {
         if (!authorization) {
             throw new Error("You are not authorized");
         }
-        const uid = authorization.replace("Bearer ", "");
-        const user = await usersModel.read(uid);
+        const token = authorization.replace("Bearer ", "");
+        const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+        const user = await usersModel.read(decodedToken.uid);
         req.user = user;
         next();
     } catch (error) {

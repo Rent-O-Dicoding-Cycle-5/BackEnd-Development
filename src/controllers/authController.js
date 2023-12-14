@@ -1,6 +1,5 @@
 const usersModel = require("../models/usersModel");
 
-
 const authController = {
     async register(req, res) {
         try {
@@ -23,6 +22,7 @@ const authController = {
     async login(req, res) {
         try {
             const user = await usersModel.signIn(req.body);
+            const token = await usersModel.generateToken(req.body);
             res.status(200).json({
                 status: "success",
                 message: "Login success!",
@@ -32,6 +32,7 @@ const authController = {
                     email: user.email,
                     emailVerified: user.emailVerified,
                     roles: user.roles,
+                    token: token,
                 },
             });
         } catch (error) {
