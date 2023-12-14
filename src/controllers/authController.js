@@ -1,6 +1,5 @@
 const usersModel = require("../models/usersModel");
 
-
 const authController = {
     async register(req, res) {
         try {

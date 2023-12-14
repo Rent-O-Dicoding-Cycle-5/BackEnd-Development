@@ -47,7 +47,6 @@ const usersModel = {
             urlImage: `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/users/profiles/default.png`,
             roles: [rolesSnapshot],
         });
-
         return createdUser;
     },
 
