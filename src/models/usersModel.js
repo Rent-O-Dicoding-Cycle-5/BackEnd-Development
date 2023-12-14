@@ -117,24 +117,20 @@ const usersModel = {
     },
 
     async uploadImgProfile(uid, imgProfile) {
-        try {
-            if (!imgProfile) {
-                throw new Error("Please upload an image");
-            }
-
-            const formattedDate = new Date().toISOString().replace(/-|:|T|Z|\./g, "");
-            const extension = imgProfile.originalname.split(".").pop();
-            const profilePath = `users/profiles/${uid}/${formattedDate}${Date.now()}.${extension}`;
-
-            await storage.bucket().file(profilePath).save(imgProfile.buffer);
-
-            const urlImage = `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${profilePath}`;
-            await realtimeDB.ref(`users/${uid}`).update({urlImage});
-
-            return urlImage;
-        } catch (error) {
-            throw new Error("Error uploading image: " + error.message);
+        if (!imgProfile) {
+            throw new Error("Please upload an image");
         }
+
+        const formattedDate = new Date().toISOString().replace(/-|:|T|Z|\./g, "");
+        const extension = imgProfile.originalname.split(".").pop();
+        const profilePath = `users/profiles/${uid}/${formattedDate}${Date.now()}.${extension}`;
+
+        await storage.bucket().file(profilePath).save(imgProfile.buffer);
+
+        const urlImage = `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${profilePath}`;
+        await realtimeDB.ref(`users/${uid}`).update({urlImage});
+
+        return urlImage;
     },
 
     generateToken(user) {
