@@ -13,7 +13,7 @@ Endpoint to check if the server is running properly.
   - Body: `"Server is running!"`
 
 
-## Authentication Endpoint
+## Authentication Endpoints
 
 ### POST /auth/register
 
@@ -59,7 +59,7 @@ Endpoint for login.
 ```
 
 
-## User Endpoint
+## User Endpoints
 
 ### GET /user/profile
 
@@ -536,6 +536,24 @@ Endpoint to filter vehicles based on vehicle type, brand, and location.
 
 ## Partner Vehicle Endpoints
 
+### GET /partner-vehicle/list
+
+Endpoint for retrieve list all partner vehicles.
+
+- URL: `/partner-vehicle/list`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read partner vehicles success!",
+  "data": {...}
+}
+```
+
 ### POST /partner-vehicle
 
 Endpoint for upload an image file of the partner vehicle image and detail vehicle.
@@ -564,24 +582,6 @@ Endpoint for upload an image file of the partner vehicle image and detail vehicl
 {
   "status": "success",
   "message": "Create partner vehicle success!",
-  "data": {...}
-}
-```
-
-### GET /partner-vehicle/list
-
-Endpoint for retrieve list all partner vehicles.
-
-- URL: `/partner-vehicle/list`
-- Method: `GET`
-- Request
-    - Headers: 
-      - `Authorization:` Bearer token for authentication.
-- Success Response (200) OK
-```json
-{
-  "status": "success",
-  "message": "Read partner vehicles success!",
   "data": {...}
 }
 ```
@@ -637,6 +637,124 @@ Endpoint for retrieve list all partner vehicles.
 {
   "status": "success",
   "message": "Delete partner vehicle success!",
+  "data": {...}
+}
+```
+
+## Rent Vehicle Endpoints
+
+
+### GET /rent-vehicle/detail/:id
+
+Endpoint for read rent vehicle.
+
+- URL: `/rent-vehicle/detail/:id`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `rentId` (string).
+- Success Response (201) OK
+```json
+{
+  "status": "success",
+  "message": "Read rent success",
+  "data": {...}
+}
+```
+
+### POST /rent-vehicle/:id
+
+Endpoint for post rent vehicle.
+
+- URL: `/rent-vehicle/:id`
+- Method: `POST`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` application/json.
+    - Params:
+      - `vehicleId` (string).
+    - Body:
+      - `startDate` (string).
+      - `endDate` (string).
+      - `pickupLocation` (string).
+      - `pickupTime` (string).
+      - `deliveryLocation` (string).
+      - `deliveryTime` (string).
+      - `paymentMethod` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Create rent success",
+  "data": {...}
+}
+```
+
+### PUT /rent-vehicle/payment/:id
+
+Endpoint for update payment.
+
+- URL: `/rent-vehicle/payment/:id`
+- Method: `PUT`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+      - `Content-Type:` application/json.
+    - Params:
+      - `rentId` (string).
+    - Body:
+      - `totalPayment` (string). 
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Update rent success",
+  "data": {...}
+}
+```
+
+## User Rent Endpoints
+
+### GET /user-rent/:uid/:rentId
+
+Endpoint for retrieve specific rent history user.
+
+- URL: `/user-rent/:uid/:rentId`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `uid` (string).
+      - `rentId` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read user rent success!",
+  "data": {...}
+}
+```
+
+### GET /user-rent/:uid
+
+Endpoint for retrieve all rent history user.
+
+- URL: `/user-rent/:uid/`
+- Method: `GET`
+- Request
+    - Headers: 
+      - `Authorization:` Bearer token for authentication.
+    - Params:
+      - `uid` (string).
+- Success Response (200) OK
+```json
+{
+  "status": "success",
+  "message": "Read all user rents success!",
   "data": {...}
 }
 ```
