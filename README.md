@@ -743,7 +743,7 @@ Endpoint for retrieve specific rent history user.
 
 Endpoint for retrieve all rent history user.
 
-- URL: `/user-rent/:uid/:rentId`
+- URL: `/user-rent/:uid/`
 - Method: `GET`
 - Request
     - Headers: 
