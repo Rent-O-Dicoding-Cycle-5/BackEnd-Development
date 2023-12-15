@@ -28,12 +28,11 @@ const authController = {
                 status: "success",
                 message: "Login success!",
                 data: {
-                    uid: user.uid,
+                    uid: token,
                     username: user.username,
                     email: user.email,
                     emailVerified: user.emailVerified,
                     roles: user.roles,
-                    token: token,
                 },
             });
         } catch (error) {
