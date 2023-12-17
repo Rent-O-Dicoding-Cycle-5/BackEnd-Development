@@ -1,6 +1,30 @@
-# Rent'O API Documentation
+# Rent'O Backend API Documentation
 
-## Endpoints Backend
+## Installations and Setup
+
+1. Clone this repository
+```bash
+  git clone https://github.com/Rent-O-Dicoding-Cycle-5/BackEnd-Development.git  
+```
+2. Navigate to project directory
+```bash
+cd BackEnd-Development
+```
+3. Install dependencies
+```bash
+npm install
+``` 
+4. Generate Private Key Firebase Admin SDK
+    - In the Firebase console, open Settings > Project Settings > Service Accounts.
+    - Click Generate New Private Key, then confirm by clicking Generate Key.
+    - Securely store the JSON file containing the key.
+5. Run the server
+```bash
+npm run start / npm run start-dev
+``` 
+
+
+## API Documentation
 
 ### GET /
 
