@@ -23,12 +23,11 @@ const authController = {
     async login(req, res) {
         try {
             const user = await usersModel.signIn(req.body);
-            const token = usersModel.generateToken(user);
             res.status(200).json({
                 status: "success",
                 message: "Login success!",
                 data: {
-                    uid: token,
+                    uid: user.uid,
                     username: user.username,
                     email: user.email,
                     emailVerified: user.emailVerified,

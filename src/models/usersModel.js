@@ -1,5 +1,4 @@
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
 const {auth, realtimeDB, storage} = require("../config");
 const rolesModel = require("./rolesModel");
 const bcryptPassword = require("../middleware/bcryptPassword");
@@ -134,19 +133,6 @@ const usersModel = {
         await realtimeDB.ref(`users/${uid}`).update({urlImage});
 
         return urlImage;
-    },
-
-    generateToken(user) {
-        const payload = {
-            uid: user.uid,
-            username: user.username,
-            email: user.email,
-            roles: user.roles,
-            iat: Math.floor(Date.now() / 1000) - 30,
-            exp: Math.floor(Date.now() / 1000) + 60 * 60,
-        };
-
-        return jwt.sign(payload, process.env.SECRET_KEY);
     },
 };
 

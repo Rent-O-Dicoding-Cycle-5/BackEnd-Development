@@ -1,5 +1,3 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
 const usersModel = require("../models/usersModel");
 
 const checkAuth = async (req, res, next) => {
@@ -8,9 +6,8 @@ const checkAuth = async (req, res, next) => {
         if (!authorization) {
             throw new Error("You are not authorized");
         }
-        const token = authorization.replace("Bearer ", "");
-        const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await usersModel.read(decodedToken.uid);
+        const uid = authorization.replace("Bearer ", "");
+        const user = await usersModel.read(uid);
         req.user = user;
         next();
     } catch (error) {
